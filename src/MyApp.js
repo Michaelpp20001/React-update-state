@@ -21,6 +21,29 @@ class MyApp extends Component {
             }
           ]
         };
+
+        setTimeout(() => {
+            //random number instructor
+            const ranInstruct = Math.floor(
+                Math.random() * 
+                this.state.instructors.length
+            );
+            //random number hobby
+            const ranHobby = Math.floor(
+                Math.random() * 
+                this.state.instructors[ranInstruct].length
+            );
+            //makes a copy of our instructors array and returns it to this variable
+            const instructors = this.state.instructors.slice();
+            //make copy of original object we want to mutate
+            instructors[ranInstruct] = Object.assign({}, instructors[ranInstruct]);
+            //make a copy of the original hobbies array
+            instructors[ranInstruct].hobbies = instructors[ranInstruct].hobbies.slice();
+            //removing that specific hobby index
+            instructors[ranInstruct].hobbies.splice(ranHobby, 1);
+            //setting the state to the copy of the original array w/ the hobby value removed
+            this.setState({instructors})
+        }, 5000);
       }
       render() {
         const instructors = this.state.instructors.map((instructor, index) => (
